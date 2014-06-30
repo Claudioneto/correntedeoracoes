@@ -47,15 +47,15 @@
                         <span class="icon-bar"></span>
                         </button>
                         <a  href="/"><img src="../../Images/logo.png" alt="Corrente de Orações" /></a>
-                        <a href="../../pedido/create" class="btn btn-default btn-lg" style="margin-left:200px;">Peça uma oração!</a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse navbar-right" id="bs-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
+                            <li><button onclick="location.href='../../pedido/create'" class="btn btn-default btn-lg navbar-btn" style="margin-left:200px;">Peça uma oração!</button></li>
+                            <li class="divider"></li>
                         @If Not Request.IsAuthenticated Then
                             @<li><a href="../../home/logar">Entrar</a></li>
-                            @<li class="divider"></li>
                             @<li><a href="../../usuario/create">Cadastrar</a></li>
                         Else
                             Dim rep As New CorrenteDeOracoes.UsuarioRepositorio
@@ -68,6 +68,7 @@
                                 
                             End If
                             @<li><a href="usuario" title="Meu Cadastro">Graça e Paz, @nomeUsuario!</a></li>
+                            @<li class="divider"></li>
                             @<li>@Html.ActionLink("Sua orações","meusPedidos","usuario")</li>
                             @<li><a href="testemunho" title="Visualize seus testemunhos">Seus Testemunhos</a></li>
                             @<li>@Html.ActionLink("Sair","loggout","home")</li>

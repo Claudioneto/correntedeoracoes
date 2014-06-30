@@ -1,6 +1,7 @@
 ﻿Imports System.Data.Entity
 Imports CorrenteDeOracoes
 Imports CorrenteDeOracoes.Models
+Imports Norm
 
 Namespace CorrenteDeOracoes
     Public Class TestemunhoController
@@ -26,8 +27,25 @@ Namespace CorrenteDeOracoes
         '
         ' GET: /Testemunho/Create
 
-        Function Create As ViewResult
-            return View()
+        Function Create(Optional pedido As String = "") As ViewResult
+            Dim testemunho As New Testemunho
+
+            If pedido <> "" Then
+                Dim ped As Pedido
+                Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
+                    ped = db.GetCollection(Of Pedido).AsQueryable().FirstOrDefault(Function(p) p.id = Guid.Parse(pedido))
+
+                    If Not ped Is Nothing Then
+                        testemunho.pedido = Guid.Parse(pedido)
+
+                        ViewBag.descricaoPedido = ped.descricao
+                        ViewBag.dataPedido = ped.data.ToString("dd/MM/yy hh:mm")
+                        ViewBag.qtdOraram = ped.qtdOrando
+                    End If
+                End Using
+            End If
+
+            Return View(testemunho)
         End Function
 
         '
@@ -36,10 +54,9 @@ Namespace CorrenteDeOracoes
         <HttpPost()>
         Function Create(testemunho As Testemunho) As ActionResult
             If ModelState.IsValid Then
-                testemunho.id = Guid.NewGuid()
-                db.Testemunhoes.Add(testemunho)
-                db.SaveChanges()
-                Return RedirectToAction("Index")
+
+
+                Return RedirectToAction("meusTestemunhos", "usuario")
             End If
 
             Return View(testemunho)

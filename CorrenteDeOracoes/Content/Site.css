@@ -87,9 +87,9 @@ textarea
 .pedido
 {
     background-color:White;
-    border-radius:1em;
     min-height:100px;
     border:2px solid #7EB9D9;
+    padding:3px;
 }
 
 .PedidoOracao
@@ -170,3 +170,9 @@ fieldset[disabled] .btn-orar.active {
   color: #fff;
   background-color: #FFC78F;
 }
+
+.publicidade
+{
+  color:Gray;
+  font-size:12px;
+}  

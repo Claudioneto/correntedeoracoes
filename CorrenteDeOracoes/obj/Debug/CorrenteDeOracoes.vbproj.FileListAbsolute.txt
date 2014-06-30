@@ -20,3 +20,25 @@ C:\Users\Neto\Documents\Visual Studio 2010\Projects\CorrenteDeOracoes\CorrenteDe
 C:\Users\Neto\Documents\Visual Studio 2010\Projects\CorrenteDeOracoes\CorrenteDeOracoes\bin\PagedList.Mvc.dll
 C:\Users\Neto\Documents\Visual Studio 2010\Projects\CorrenteDeOracoes\CorrenteDeOracoes\bin\PagedList.xml
 C:\Users\Neto\Documents\Visual Studio 2010\Projects\CorrenteDeOracoes\CorrenteDeOracoes\bin\PagedList.Mvc.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\CorrenteDeOracoes.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\CorrenteDeOracoes.pdb
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\CorrenteDeOracoes.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\EntityFramework.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\Facebook.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\Newtonsoft.Json.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\Norm.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\PagedList.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\PagedList.Mvc.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\EntityFramework.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\Facebook.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\Newtonsoft.Json.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\Norm.pdb
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\Norm.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\PagedList.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\bin\PagedList.Mvc.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\obj\Debug\CorrenteDeOracoes.vbprojResolveAssemblyReference.cache
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\obj\Debug\CorrenteDeOracoes.Resources.resources
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\obj\Debug\CorrenteDeOracoes.vbproj.GenerateResource.Cache
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\obj\Debug\CorrenteDeOracoes.dll
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\obj\Debug\CorrenteDeOracoes.xml
+C:\Users\Neto\Documents\GitHub\correntedeoracoes\CorrenteDeOracoes\obj\Debug\CorrenteDeOracoes.pdb

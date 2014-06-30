@@ -11,33 +11,34 @@ End Code
 </div>
 
 <div class="col-sm-3">
-    <!--Aqui deverá vir um resumo de seus pedidos-->
+    <!--resumo de seus pedidos-->
     <div class="col-sm-12 pedido">
         <p>@Model(0).usuario.primeiroNome, você tem <strong>@ViewBag.qtdPedidos pedidos</strong> feitos e já oraram por você <strong>@ViewBag.qtdOracoes vezes</strong>.</p>
         <p>Visite os pedidos de outras pessoas e retribua intercedendo por seus irmãos.</p>
+        <br />
+        <p class="publicidade">Publicidade</p>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/javascript"></script>
+        <!-- CDO-MeusPedidos -->
+        <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-1017535286769229"
+                data-ad-slot="9383934437"
+                data-ad-format="auto"></ins>
+        <script type="text/javascript">
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 </div>
 
 <div class="col-sm-9">
-    <!--Aqui deverá vir uma listagem de seus pedidos-->
+    <!--listagem de seus pedidos-->
     @For i As Integer = 0 To Model.Count - 1
         @<div class="row col-sm-12 pedido">
-            <p class="PedidoOracao">@Html.ActionLink(Model(i).data.ToString("dd/MM/yy hh:mm"), "details", "pedido", New With {.id = Model(i).id}, Nothing) - @Model(i).descricao</p>
-
-            @If Not Model(i).tags Is Nothing Then
-                @<ul class="list-inline">
-                    <li>Tags: </li>
-                @For Each tag As String In Model(i).tags
-                    @<li><a href="../../pedido/index?tag=@tag" title="Clique aqui para visualizar pedidos semelhantes">@tag</a></li>
-                Next
-                </ul>
-            End If
             <div class="row">
-                <div class="col-sm-5">
-                    Ore por: <span class="Apelido">@Model(i).apelido</span>
+                <div class="col-sm-8">
+                    <p class="PedidoOracao">@Html.ActionLink(Model(i).data.ToString("dd/MM/yy hh:mm"), "details", "pedido", New With {.id = Model(i).id}, Nothing) - @Model(i).descricao</p>
                 </div>
-                
-                <div class="col-sm-7 qtdOrando">
+                <div class="col-sm-4">
                     @If Model(i).qtdOrando > 0 Then
                         If Model(i).qtdOrando = 1 Then
                             @:1 pessoa orou!
@@ -46,6 +47,23 @@ End Code
                         End If
                     End If
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    @If Not Model(i).tags Is Nothing Then
+                        @<ul class="list-inline">
+                            <li>Tags: </li>
+                        @For Each tag As String In Model(i).tags
+                            @<li><a href="../../pedido/index?tag=@tag" title="Clique aqui para visualizar pedidos semelhantes">@tag</a></li>
+                        Next
+                        </ul>
+                    End If
+                </div>
+                @If Not Model(i).pedidoAtendido Then
+                    @<div class="col-sm-4">
+                        <button class="btn btn-orar" onclick="location.href='../../testemunho/create?pedido=@Model(i).id'" title="Clique aqui para dar um testemunho">Deus atendeu meu pedido!</button>
+                    </div>
+                end if
             </div>
         </div>
     Next

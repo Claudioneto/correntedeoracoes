@@ -18,7 +18,7 @@ End Section
     <p>Mateus 21:22</p>
 </div>
 
-@Using Html.BeginForm()
+@Using Html.BeginForm("create", "pedido", FormMethod.Post, New With {.class = "form-horizontal", .role = "form"})
     @Html.ValidationSummary(True)
     @<fieldset>
         <div class="form-group">
@@ -42,6 +42,19 @@ End Section
         </p>
     </fieldset>
 End Using
+
+<div style="width:728px;margin:0 auto;">
+    <p class="publicidade">Publicidade</p>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- CDO-NovoPedido -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-1017535286769229"
+         data-ad-slot="9244333631"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
 
 <script type="text/javascript">
     $('#tagsPedido').tagsInput({

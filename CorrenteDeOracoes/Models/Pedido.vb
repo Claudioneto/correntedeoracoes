@@ -7,6 +7,7 @@ Public Class Pedido
         Me.data = Date.Now
         Me.qtdOrando = 0
         Me.tags = New List(Of String)
+        Me.pedidoAtendido = False
     End Sub
 
     Public Property id As Guid
@@ -26,4 +27,5 @@ Public Class Pedido
 
     <Display(Name:="Digite tags que identifiquem seu pedido. Ex: Emprego, doença, relacionameto, carro novo")>
     Public Property tags As List(Of String)
+    Public Property pedidoAtendido As Boolean
 End Class

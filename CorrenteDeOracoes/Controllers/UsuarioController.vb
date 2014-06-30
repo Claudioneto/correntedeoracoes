@@ -99,7 +99,7 @@ Namespace CorrenteDeOracoes
                      ).Sum(Function(p) p.qtdOrando)
             End Using
 
-            Return View(pedidos.ToPagedList(pagina, 5))
+            Return View(pedidos.ToPagedList(pagina, 10))
         End Function
 
         Protected Overrides Sub Dispose(disposing As Boolean)
