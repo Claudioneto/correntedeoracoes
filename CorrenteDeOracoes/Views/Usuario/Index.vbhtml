@@ -10,9 +10,14 @@ End Code
 <fieldset>
     <legend>Usuario</legend>
 
-    <div class="display-label">nome</div>
+    <div class="display-label">Primeiro nome</div>
     <div class="display-field">
-        @Html.DisplayFor(Function(model) model.nome)
+        @Html.DisplayFor(Function(model) model.primeiroNome)
+    </div>
+
+    <div class="display-label">Sobrenome</div>
+    <div class="display-field">
+        @Html.DisplayFor(Function(model) model.sobrenome)
     </div>
 
     <div class="display-label">email</div>
