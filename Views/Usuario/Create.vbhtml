@@ -64,10 +64,18 @@ End Code
         @Html.ValidationSummary(True)
 
             @<div class="form-group">
-                @Html.LabelFor(Function(model) model.nome, New With {.class = "col-sm-3 control-label"})
+                @Html.LabelFor(Function(model) model.primeiroNome, New With {.class = "col-sm-3 control-label"})
                 <div class="col-sm-9">
-                    @Html.TextBoxFor(Function(model) model.nome, New With {.class = "form-control"})
-                    @Html.ValidationMessageFor(Function(model) model.nome)
+                    @Html.TextBoxFor(Function(model) model.primeiroNome, New With {.class = "form-control"})
+                    @Html.ValidationMessageFor(Function(model) model.primeiroNome)
+                </div>
+            </div>
+        
+            @<div class="form-group">
+                @Html.LabelFor(Function(model) model.sobrenome, New With {.class = "col-sm-3 control-label"})
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(Function(model) model.sobrenome, New With {.class = "form-control"})
+                    @Html.ValidationMessageFor(Function(model) model.sobrenome)
                 </div>
             </div>
         

@@ -18,11 +18,19 @@ End Code
         @Html.HiddenFor(Function(model) model.id)
 
         <div class="editor-label">
-            @Html.LabelFor(Function(model) model.nome)
+            @Html.LabelFor(Function(model) model.primeiroNome)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(Function(model) model.nome)
-            @Html.ValidationMessageFor(Function(model) model.nome)
+            @Html.EditorFor(Function(model) model.primeiroNome)
+            @Html.ValidationMessageFor(Function(model) model.primeiroNome)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(Function(model) model.sobrenome)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(Function(model) model.sobrenome)
+            @Html.ValidationMessageFor(Function(model) model.sobrenome)
         </div>
 
         <div class="editor-label">
