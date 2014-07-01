@@ -26,7 +26,7 @@ Namespace CorrenteDeOracoes
 
         '
         ' GET: /Testemunho/Create
-
+        <Authorize()>
         Function Create(Optional pedido As String = "") As ViewResult
             Dim testemunho As New Testemunho
 
@@ -36,11 +36,14 @@ Namespace CorrenteDeOracoes
                     ped = db.GetCollection(Of Pedido).AsQueryable().FirstOrDefault(Function(p) p.id = Guid.Parse(pedido))
 
                     If Not ped Is Nothing Then
-                        testemunho.pedido = Guid.Parse(pedido)
+                        'Verifica se quem está usando esse pedido realmente é quem o criou
+                        If Guid.Parse(User.Identity.Name) = ped.usuario.id Then
+                            testemunho.pedido = Guid.Parse(pedido)
 
-                        ViewBag.descricaoPedido = ped.descricao
-                        ViewBag.dataPedido = ped.data.ToString("dd/MM/yy hh:mm")
-                        ViewBag.qtdOraram = ped.qtdOrando
+                            ViewBag.descricaoPedido = ped.descricao
+                            ViewBag.dataPedido = ped.data.ToString("dd/MM/yy hh:mm")
+                            ViewBag.qtdOraram = ped.qtdOrando
+                        End If
                     End If
                 End Using
             End If
@@ -52,9 +55,19 @@ Namespace CorrenteDeOracoes
         ' POST: /Testemunho/Create
 
         <HttpPost()>
+        <Authorize()>
         Function Create(testemunho As Testemunho) As ActionResult
             If ModelState.IsValid Then
+                Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
 
+                    If Not testemunho.pedido = Nothing Then
+                        Dim pedido As Pedido = db.GetCollection(Of Pedido).AsQueryable().First(Function(p) p.id = testemunho.pedido)
+                        pedido.pedidoAtendido = True
+                        db.GetCollection(Of Pedido).Save(pedido)
+                    End If
+
+                    db.GetCollection(Of Testemunho).Save(testemunho)
+                End Using
 
                 Return RedirectToAction("meusTestemunhos", "usuario")
             End If

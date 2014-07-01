@@ -176,3 +176,7 @@ fieldset[disabled] .btn-orar.active {
   color:Gray;
   font-size:12px;
 }  
+
+.cdo-novotestemunho { width: 320px; height: 50px; }
+@media(min-width: 500px) { .cdo-novotestemunho { width: 468px; height: 60px; } }
+@media(min-width: 800px) { .cdo-novotestemunho { width: 336px; height: 280px; } }

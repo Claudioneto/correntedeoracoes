@@ -37,8 +37,6 @@ Namespace CorrenteDeOracoes
         <ValidateAntiForgeryToken()>
         Function Create(usuario As Usuario) As ActionResult
             If ModelState.IsValid Then
-                usuario.id = Guid.NewGuid()
-
                 Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
                     db.GetCollection(Of Usuario).Save(usuario)
                 End Using
