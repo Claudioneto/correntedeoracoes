@@ -39,9 +39,13 @@ Namespace CorrenteDeOracoes
                         'Verifica se quem está usando esse pedido realmente é quem o criou
                         If Guid.Parse(User.Identity.Name) = ped.usuario Then
                             testemunho.pedido = ped
+                        Else
+                            ViewBag.msg = "Você só pode testemunhar em pedidos que você quem fez."
                         End If
                     End If
                 End Using
+            Else
+                ViewBag.msg = "Você não selecionou nenhum pedido. Você pode testemunhar mesmo assim, mas se desejar testemunhar sobre um pedido feito no site, acesse seu pedido na aba Seus Pedidos e escolha testemunhar a partir dele."
             End If
 
             Return View(testemunho)

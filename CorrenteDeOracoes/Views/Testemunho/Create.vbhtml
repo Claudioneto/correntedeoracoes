@@ -19,13 +19,15 @@ End Section
 </div>
 
 <div class="col-sm-9">
-    @If ViewBag.descricaoPedido <> "" Then
+    @If Not Model.pedido Is Nothing Then
         @<div class="row pedido">
             <p style="font-weight:bold;font-size:16px;">@Model.pedido.descricao</p>
             <p>Data: @Model.pedido.data </p>
             <p>Você recebeu @Model.pedido.qtdOrando orações por seu pedido</p>
         </div>
-    End if
+    Else
+        @<p>@ViewBag.msg</p>
+    End If
     <br />
     @Using Html.BeginForm("create", "testemunho", FormMethod.Post, New With {.class = "form-horizontal", .role = "form"})
         @Html.ValidationSummary(True)

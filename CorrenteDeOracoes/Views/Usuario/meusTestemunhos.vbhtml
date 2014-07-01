@@ -13,8 +13,13 @@ End Code
 <div class="col-sm-3">
     <!--resumo de seus pedidos-->
     <div class="col-sm-12 pedido">
-        <p>@ViewBag.nomeUsuario, você já testemunhou <strong>@ViewBag.qtdTestemunhos vezes</strong>.</p>
-        <p>Mantenha firme sua fé, realize novos pedidos e continue orando por seus irmãos.</p>
+        @If ViewBag.qtdTestemunhos > 0 Then
+            @<p>@ViewBag.nomeUsuario, você já testemunhou <strong>@ViewBag.qtdTestemunhos vezes</strong>.</p>
+            @<p>Mantenha firme sua fé, realize novos pedidos e continue orando por seus irmãos.</p>
+        Else
+            @<p>@ViewBag.nomeUsuario, você ainda não testemunhou nenhuma vez, mantenha-se em oração e creia que Deus realizará seu pedido.</p>
+        End If
+        <button class="btn btn-orar" onclick="location.href='../../testemunho/create'" title="Clique aqui para dar um testemunho">Quero testemunhar!</button>
         <br />
         <p class="publicidade">Publicidade</p>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" type="text/javascript"></script>
