@@ -37,12 +37,8 @@ Namespace CorrenteDeOracoes
 
                     If Not ped Is Nothing Then
                         'Verifica se quem está usando esse pedido realmente é quem o criou
-                        If Guid.Parse(User.Identity.Name) = ped.usuario.id Then
-                            testemunho.pedido = Guid.Parse(pedido)
-
-                            ViewBag.descricaoPedido = ped.descricao
-                            ViewBag.dataPedido = ped.data.ToString("dd/MM/yy hh:mm")
-                            ViewBag.qtdOraram = ped.qtdOrando
+                        If Guid.Parse(User.Identity.Name) = ped.usuario Then
+                            testemunho.pedido = ped
                         End If
                     End If
                 End Using
@@ -60,12 +56,13 @@ Namespace CorrenteDeOracoes
             If ModelState.IsValid Then
                 Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
 
-                    If Not testemunho.pedido = Nothing Then
-                        Dim pedido As Pedido = db.GetCollection(Of Pedido).AsQueryable().First(Function(p) p.id = testemunho.pedido)
+                    If Not testemunho.pedido Is Nothing Then
+                        Dim pedido As Pedido = db.GetCollection(Of Pedido).AsQueryable().First(Function(p) p.id = testemunho.pedido.id)
                         pedido.pedidoAtendido = True
                         db.GetCollection(Of Pedido).Save(pedido)
                     End If
 
+                    testemunho.usuario = Guid.Parse(User.Identity.Name)
                     db.GetCollection(Of Testemunho).Save(testemunho)
                 End Using
 

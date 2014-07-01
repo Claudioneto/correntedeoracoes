@@ -21,9 +21,9 @@ End Section
 <div class="col-sm-9">
     @If ViewBag.descricaoPedido <> "" Then
         @<div class="row pedido">
-            <p style="font-weight:bold;font-size:16px;">@ViewBag.descricaoPedido</p>
-            <p>Data: @ViewBag.dataPedido </p>
-            <p>Você recebeu @ViewBag.qtdOraram orações por seu pedido</p>
+            <p style="font-weight:bold;font-size:16px;">@Model.pedido.descricao</p>
+            <p>Data: @Model.pedido.data </p>
+            <p>Você recebeu @Model.pedido.qtdOrando orações por seu pedido</p>
         </div>
     End if
     <br />

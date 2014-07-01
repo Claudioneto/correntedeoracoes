@@ -69,8 +69,8 @@
                             End If
                             @<li><a href="usuario" title="Meu Cadastro">Graça e Paz, @nomeUsuario!</a></li>
                             @<li class="divider"></li>
-                            @<li>@Html.ActionLink("Sua orações","meusPedidos","usuario")</li>
-                            @<li><a href="testemunho" title="Visualize seus testemunhos">Seus Testemunhos</a></li>
+                            @<li>@Html.ActionLink("Suas orações", "meusPedidos", "usuario")</li>
+                            @<li>@Html.ActionLink("Seus Testemunhos", "meusTestemunhos", "usuario")</li>
                             @<li>@Html.ActionLink("Sair","loggout","home")</li>
                         End If
                         </ul>

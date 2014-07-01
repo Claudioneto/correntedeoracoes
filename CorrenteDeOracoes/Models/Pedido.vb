@@ -23,7 +23,7 @@ Public Class Pedido
     <Required()>
     <Display(Name:="Como desejar ser identificado?")>
     Public Property apelido As String
-    Public Property usuario As Usuario
+    Public Property usuario As Guid
 
     <Display(Name:="Digite tags que identifiquem seu pedido. Ex: Emprego, doença, relacionameto, carro novo")>
     Public Property tags As List(Of String)

@@ -14,5 +14,7 @@ Public Class Testemunho
     <Required()>
     <Display(Name:="Data")>
     Public Property data As Date
-    Public Property pedido As Guid
+    Public Property pedido As Pedido
+
+    Public Property usuario As Guid
 End Class

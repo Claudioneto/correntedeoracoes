@@ -66,10 +66,9 @@ Namespace CorrenteDeOracoes
         Function Create() As ViewResult
             Dim apelido As String = ""
             Dim usuario As Usuario
+            Dim userRep As New UsuarioRepositorio
 
-            Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
-                usuario = db.GetCollection(Of Usuario).AsQueryable.FirstOrDefault(Function(u) u.id = Guid.Parse(User.Identity.Name))
-            End Using
+            usuario = userRep.getUsuarioLogado
 
             If Not usuario Is Nothing Then
                 apelido = usuario.primeiroNome
@@ -90,9 +89,6 @@ Namespace CorrenteDeOracoes
         <Authorize()>
         Function Create(pedido As Pedido) As ActionResult
             If ModelState.IsValid Then
-                Dim usuario As Usuario
-                Dim userID As Guid = Guid.Parse(User.Identity.Name)
-
                 Dim strTags As String = Request.Form("tagsPedido")
                 Dim arrTags As Array = Split(strTags, ",")
                 Dim tag As Tag
@@ -118,9 +114,7 @@ Namespace CorrenteDeOracoes
                         Next
                     End If
 
-                    usuario = db.GetCollection(Of Usuario).AsQueryable.FirstOrDefault(Function(u) u.id = userID)
-
-                    pedido.usuario = usuario
+                    pedido.usuario = Guid.Parse(User.Identity.Name)
                     db.GetCollection(Of Pedido).Save(pedido)
                 End Using
 

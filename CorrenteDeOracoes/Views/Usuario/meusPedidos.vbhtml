@@ -13,7 +13,7 @@ End Code
 <div class="col-sm-3">
     <!--resumo de seus pedidos-->
     <div class="col-sm-12 pedido">
-        <p>@Model(0).usuario.primeiroNome, você tem <strong>@ViewBag.qtdPedidos pedidos</strong> feitos e já oraram por você <strong>@ViewBag.qtdOracoes vezes</strong>.</p>
+        <p>@ViewBag.nomeUsuario, você tem <strong>@ViewBag.qtdPedidos pedidos</strong> feitos e já oraram por você <strong>@ViewBag.qtdOracoes vezes</strong>.</p>
         <p>Visite os pedidos de outras pessoas e retribua intercedendo por seus irmãos.</p>
         <br />
         <p class="publicidade">Publicidade</p>

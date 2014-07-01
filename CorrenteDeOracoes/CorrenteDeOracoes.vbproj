@@ -271,6 +271,7 @@
     <Content Include="Views\Home\Logar.vbhtml" />
     <Content Include="Views\Home\EstouOrando.vbhtml" />
     <Content Include="Views\Usuario\meusPedidos.vbhtml" />
+    <Content Include="Views\Usuario\meusTestemunhos.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

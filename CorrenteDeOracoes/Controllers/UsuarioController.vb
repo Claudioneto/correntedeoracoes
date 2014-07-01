@@ -68,9 +68,10 @@ Namespace CorrenteDeOracoes
         Function Edit(usuario As Usuario) As ActionResult
             If ModelState.IsValid Then
                 Dim userID As Guid = Guid.Parse(User.Identity.Name)
+                Dim userRep As New UsuarioRepositorio
+                usuario = userRep.getUsuarioLogado
 
                 Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
-                    usuario = db.GetCollection(Of Usuario).AsQueryable().FirstOrDefault(Function(u) u.id = userID)
                     db.GetCollection(Of Usuario).Save(usuario)
                 End Using
 
@@ -83,21 +84,44 @@ Namespace CorrenteDeOracoes
         <Authorize()>
         Function meusPedidos(Optional pagina As Integer = 1) As ActionResult
             Dim pedidos As List(Of Pedido)
+            Dim userRep As New UsuarioRepositorio
+            Dim usuario As Usuario = userRep.getUsuarioLogado
+
+            ViewBag.nomeUsuario = usuario.primeiroNome
 
             Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
                 pedidos =
                     (From p In db.GetCollection(Of Pedido).Find
-                     Where p.usuario.id = Guid.Parse(User.Identity.Name)
+                     Where p.usuario = Guid.Parse(User.Identity.Name)
                      ).OrderByDescending(Function(p) p.data).ToList()
 
                 ViewBag.qtdPedidos = pedidos.Count
                 ViewBag.qtdOracoes =
                     (From p In db.GetCollection(Of Pedido).Find
-                     Where p.usuario.id = Guid.Parse(User.Identity.Name)
+                     Where p.usuario = Guid.Parse(User.Identity.Name)
                      ).Sum(Function(p) p.qtdOrando)
             End Using
 
             Return View(pedidos.ToPagedList(pagina, 10))
+        End Function
+
+        Function meusTestemunhos(Optional pagina As Integer = 1) As ActionResult
+            Dim testemunho As List(Of Testemunho)
+            Dim userRep As New UsuarioRepositorio
+            Dim usuario As Usuario = userRep.getUsuarioLogado
+
+            ViewBag.nomeUsuario = usuario.primeiroNome
+
+            Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
+                testemunho =
+                    (From t In db.GetCollection(Of Testemunho).Find
+                     Where t.usuario = Guid.Parse(User.Identity.Name)
+                     ).OrderByDescending(Function(t) t.data).ToList()
+
+                ViewBag.qtdTestemunhos = testemunho.Count
+            End Using
+
+            Return View(testemunho.ToPagedList(pagina, 10))
         End Function
 
         Protected Overrides Sub Dispose(disposing As Boolean)
