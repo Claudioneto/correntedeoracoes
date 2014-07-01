@@ -3,11 +3,12 @@
 Public Class Testemunho
     Public Sub New()
         Me.id = Guid.NewGuid
+        Me.data = Date.Today
     End Sub
 
     Public Property id As Guid
     <Required()>
-    <Display(Name:="Conte como foi")>
+    <Display(Name:="Descreva seu testemunho")>
     Public Property descricao As String
 
     <Required()>
