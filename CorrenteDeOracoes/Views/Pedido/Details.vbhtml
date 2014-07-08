@@ -64,7 +64,7 @@ End Functions
         </div>
     
         <div class="col-sm-7 qtdOrando">
-            @If Guid.Parse(User.Identity.Name) <> Model(0).usuario.id Then
+            @If Guid.Parse(User.Identity.Name) <> Model(0).usuario Then
                 If mostraBotao(Model(0).id) Then
                     @<button onclick="estouOrando('@Model(0).id.ToString')" class="btn btn-xs btn-orar" title="Ore e marque que orou por esse pedido!">Estou Orando <img src="../../images/maoorando.png" alt="" /></button>
                 ElseIf Request.IsAuthenticated Then
@@ -78,7 +78,7 @@ End Functions
                 Else
                     @Model(0).qtdOrando @:pessoas(oraram!)
                 End If
-            ElseIf Guid.Parse(User.Identity.Name) <> Model(0).usuario.id Then
+            ElseIf Guid.Parse(User.Identity.Name) <> Model(0).usuario Then
                 @:Seja o primeiro a orar por esse pedido
             End If
         </div>
