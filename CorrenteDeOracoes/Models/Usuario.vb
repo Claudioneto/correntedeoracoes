@@ -42,6 +42,7 @@ Public Class Usuario
     Public Property ativo As Boolean
     Public Property dataCadastro As Date
     Public Property dataUltimoAcesso As Date
+    Public Property dataPenultimoAcesso As Date
     Public Property foto As String
 
     <Display(Name:="Cidade")>

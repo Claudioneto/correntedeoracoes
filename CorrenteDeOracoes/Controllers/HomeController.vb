@@ -26,12 +26,27 @@ Namespace CorrenteDeOracoes
 
         <HttpPost()>
         <ValidateAntiForgeryToken()>
-        Function Logar(email As String, senha As String) As ActionResult
+        Function Logar(email As String, senha As String, Optional returnURL As String = "") As ActionResult
             Dim user As New UsuarioRepositorio
 
             If user.AutenticarUsuario(email, senha) = False Then
                 ViewBag.msgError = "Usuário ou senha inválidos"
                 Return View()
+            End If
+
+            If returnURL <> "" Then
+                Dim qtd As Integer = returnURL.ToString.Count - returnURL.ToString.Replace("/", "").Count
+                Dim acao As String
+                Dim controller As String
+                If qtd = 1 Then
+                    acao = "index"
+                    controller = Replace(returnURL, "/", "")
+                Else
+                    Dim arrAcao As Array = Split(returnURL, "/")
+                    controller = arrAcao(1)
+                    acao = arrAcao(2)
+                End If
+                Return RedirectToAction(acao, controller)
             End If
 
             Return RedirectToAction("index")
@@ -45,7 +60,7 @@ Namespace CorrenteDeOracoes
             Return RedirectToAction("index")
         End Function
 
-        Public Function FacebookLogin(authResponse As String) As ActionResult
+        Public Function FacebookLogin(authResponse As String, Optional returnURL As String = "") As ActionResult
 
             Dim client As WebClient = New WebClient()
             Dim JsonResult As String = client.DownloadString(String.Concat("https://graph.facebook.com/me?access_token=", authResponse))
@@ -71,12 +86,28 @@ Namespace CorrenteDeOracoes
                 user.linkFacebook = jsonUserInfo.Value(Of String)("link")
                 user.sexo = jsonUserInfo.Value(Of String)("gender")
                 user.email = jsonUserInfo.Value(Of String)("email")
+                user.dataPenultimoAcesso = user.dataUltimoAcesso
                 user.dataUltimoAcesso = Date.Now
 
                 db.GetCollection(Of Usuario).Save(user)
             End Using
 
             FormsAuthentication.SetAuthCookie(user.id.ToString, False)
+
+            If returnURL <> "" Then
+                Dim qtd As Integer = returnURL.ToString.Count - returnURL.ToString.Replace("/", "").Count
+                Dim acao As String
+                Dim controller As String
+                If qtd = 1 Then
+                    acao = "index"
+                    controller = Replace(returnURL, "/", "")
+                Else
+                    Dim arrAcao As Array = Split(returnURL, "/")
+                    controller = arrAcao(1)
+                    acao = arrAcao(2)
+                End If
+                Return RedirectToAction(acao, controller)
+            End If
 
             Return RedirectToAction("index")
         End Function

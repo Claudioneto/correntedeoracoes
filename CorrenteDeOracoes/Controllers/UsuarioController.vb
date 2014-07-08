@@ -19,6 +19,13 @@ Namespace CorrenteDeOracoes
 
             Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
                 usuario = db.GetCollection(Of Usuario).AsQueryable().FirstOrDefault(Function(u) u.id = userID)
+
+                ViewBag.qtdPedidos = db.GetCollection(Of Pedido).Find().Count(Function(p) p.usuario = Guid.Parse(User.Identity.Name))
+                ViewBag.qtdTestemunhos = db.GetCollection(Of Testemunho).Find().Count(Function(t) t.usuario = Guid.Parse(User.Identity.Name))
+                ViewBag.qtdOraramPorMim =
+                    (From p In db.GetCollection(Of Pedido).Find
+                        Where p.usuario = usuario.id).Sum(Function(p) p.qtdOrando)
+
             End Using
 
             Return View(usuario)

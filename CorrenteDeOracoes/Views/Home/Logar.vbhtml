@@ -10,7 +10,7 @@ End Code
     function statusChangeCallback(response) {
         if (response.status === 'connected') {
             // Logged into your app and Facebook.
-            window.location = "../home/FacebookLogin?authResponse=" + response.authResponse.accessToken;
+            window.location = "../home/FacebookLogin?authResponse=" + response.authResponse.accessToken + "&ReturnURL=@Request.QueryString("ReturnURL")";
         }
     }
 

@@ -13,6 +13,10 @@ Public Class UsuarioRepositorio
 
             If Not user Is Nothing Then
                 If user.email <> email Or user.senha <> senha Then user = Nothing
+
+                user.dataPenultimoAcesso = user.dataUltimoAcesso
+                user.dataUltimoAcesso = Date.Now
+                db.GetCollection(Of Usuario).Save(user)
             End If
         End Using
 
