@@ -62,26 +62,28 @@ End Functions
     </div>
 Next
 
-<div>
-    Página @(If(Model.PageCount < Model.PageNumber, 0, Model.PageNumber)) de @Model.PageCount
+@If Model.PageCount > 1 Then
+    @<div>
+        Página @(If(Model.PageCount < Model.PageNumber, 0, Model.PageNumber)) de @Model.PageCount
      
-    @If (Model.HasPreviousPage) Then
-        @Html.ActionLink("<<", "Index", New With {.pagina = 1})
-        @Html.Raw(" ")
-        @Html.ActionLink("< Anterior", "Index", New With {.pagina = Model.PageNumber - 1})
-    else
-        @:<<
-        @Html.Raw(" ")
-        @:< Anterior
-    End If
+        @If (Model.HasPreviousPage) Then
+            @Html.ActionLink("<<", "Index", New With {.pagina = 1})
+            @Html.Raw(" ")
+            @Html.ActionLink("< Anterior", "Index", New With {.pagina = Model.PageNumber - 1})
+        else
+            @:<<
+            @Html.Raw(" ")
+            @:< Anterior
+        End If
      
-    @If (Model.HasNextPage) Then
-        @Html.ActionLink("Próxima >", "Index", New With {.pagina = Model.PageNumber + 1})
-        @Html.Raw(" ")
-        @Html.ActionLink(">>", "Index", New With {.pagina = Model.PageCount})
-    else
-        @:Próxima >
-        @Html.Raw(" ")
-        @:>>
-    End If
-</div>
+        @If (Model.HasNextPage) Then
+            @Html.ActionLink("Próxima >", "Index", New With {.pagina = Model.PageNumber + 1})
+            @Html.Raw(" ")
+            @Html.ActionLink(">>", "Index", New With {.pagina = Model.PageCount})
+        else
+            @:Próxima >
+            @Html.Raw(" ")
+            @:>>
+        End If
+    </div>
+End If
