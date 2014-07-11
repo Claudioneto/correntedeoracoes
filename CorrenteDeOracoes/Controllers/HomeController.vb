@@ -84,8 +84,8 @@ Namespace CorrenteDeOracoes
                 user.sobrenome = jsonUserInfo.Value(Of String)("last_name")
                 user.idFacebook = idFacebook
                 user.linkFacebook = jsonUserInfo.Value(Of String)("link")
-                user.sexo = jsonUserInfo.Value(Of String)("gender")
-                user.email = jsonUserInfo.Value(Of String)("email")
+                user.sexo = IIf(jsonUserInfo.Value(Of String)("gender") <> jsonUserInfo.Value(Of String)("gender"), jsonUserInfo.Value(Of String)("gender"), user.sexo)
+                user.email = IIf(jsonUserInfo.Value(Of String)("email") <> "", jsonUserInfo.Value(Of String)("email"), user.email)
                 user.dataPenultimoAcesso = user.dataUltimoAcesso
                 user.dataUltimoAcesso = Date.Now
 
@@ -148,6 +148,26 @@ Namespace CorrenteDeOracoes
             End If
 
             Return PartialView(pedidos.ToPagedList(pagina, tamanhoPagina))
+        End Function
+
+        Function termos() As ActionResult
+
+            Return View()
+        End Function
+
+        Function privacidade() As ActionResult
+
+            Return View()
+        End Function
+
+        Function missao() As ActionResult
+
+            Return View()
+        End Function
+
+        Function quemsomos() As ActionResult
+
+            Return View()
         End Function
     End Class
 End Namespace

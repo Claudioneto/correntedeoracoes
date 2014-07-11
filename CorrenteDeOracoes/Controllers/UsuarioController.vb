@@ -63,6 +63,12 @@ Namespace CorrenteDeOracoes
 
             Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
                 usuario = db.GetCollection(Of Usuario).AsQueryable().FirstOrDefault(Function(u) u.id = userID)
+
+                If usuario.senha = "" Or Len(usuario.senha) < 8 Then
+                    usuario.senha = usuario.geraSenha()
+                    db.GetCollection(Of Usuario).Save(usuario)
+                End If
+
             End Using
 
             Return View(usuario)
@@ -74,10 +80,6 @@ Namespace CorrenteDeOracoes
         <HttpPost()>
         Function Edit(usuario As Usuario) As ActionResult
             If ModelState.IsValid Then
-                Dim userID As Guid = Guid.Parse(User.Identity.Name)
-                Dim userRep As New UsuarioRepositorio
-                usuario = userRep.getUsuarioLogado
-
                 Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
                     db.GetCollection(Of Usuario).Save(usuario)
                 End Using

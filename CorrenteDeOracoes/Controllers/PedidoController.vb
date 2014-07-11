@@ -2,6 +2,7 @@
 Imports CorrenteDeOracoes
 Imports CorrenteDeOracoes.Models
 Imports Norm
+Imports PagedList
 
 Namespace CorrenteDeOracoes
     Public Class PedidoController
@@ -12,21 +13,21 @@ Namespace CorrenteDeOracoes
         '
         ' GET: /Pedido/
 
-        Function Index(Optional tag As String = "") As ViewResult
+        Function Index(Optional tag As String = "", Optional pagina As Integer = 1) As ViewResult
             Dim pedidos As List(Of Pedido)
             Using db = Mongo.Create(ConfigurationManager.ConnectionStrings("MongoConnection").ConnectionString.ToString())
                 If tag <> "" Then
                     pedidos =
                         (From p In db.GetCollection(Of Pedido).Find
-                            where p.tags.Contains(tag) And
-                            p.data >= DateAdd(DateInterval.Day,-30, Date.Today)
+                            Where p.tags.Contains(tag) And
+                            p.data >= DateAdd(DateInterval.Day, -30, Date.Today)
                             ).OrderByDescending(Function(p) p.data).ToList
                 Else
                     pedidos = db.GetCollection(Of Pedido).Find(Function(p) p.data >= DateAdd(DateInterval.Day, -30, Date.Today)).OrderByDescending(Function(p) p.data).ToList
                 End If
 
             End Using
-            Return View(pedidos)
+            Return View(pedidos.ToPagedList(pagina, 10))
         End Function
 
         '
@@ -89,7 +90,7 @@ Namespace CorrenteDeOracoes
         <Authorize()>
         Function Create(pedido As Pedido) As ActionResult
             If ModelState.IsValid Then
-                Dim strTags As String = Request.Form("tagsPedido")
+                Dim strTags As String = LCase(Request.Form("tagsPedido"))
                 Dim arrTags As Array = Split(strTags, ",")
                 Dim tag As Tag
 

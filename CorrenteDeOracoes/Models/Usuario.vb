@@ -27,8 +27,9 @@ Public Class Usuario
     <Required(ErrorMessage:="O e-mail não pode ficar em branco")>
     Public Property email As String
 
-    <Display(Name:="Insira uma senha")> _
-    <Required(ErrorMessage:="Por favor, preencha sua senha")>
+    <Display(Name:="Insira uma senha")>
+    <RegularExpression("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", ErrorMessage:="Sua senha precisa ter no mínimo 8 caracteres e possuir pelo menos um número e uma letra")>
+    <Required(ErrorMessage:="O campo senha é de preenchimento obrigatório")>
     Public Property senha As String
 
     <Display(Name:="CPF")> _
@@ -54,5 +55,28 @@ Public Class Usuario
     <Display(Name:="Frequenta alguma igreja? Qual?")>
     Public Property igreja As String
 
-    Public Property oreiPor As List(Of Guid)
+    Public Property oreiPor As New List(Of Guid)
+
+    Public Function geraSenha()
+        Dim a, i, s
+        For i = 48 To 90
+            If i < 58 Or i > 64 Then
+                a = a & Chr(i) & " "
+            End If
+        Next
+
+        a = Split(LCase(a) & a)
+        Randomize()
+        For i = 1 To 8
+            s = s & a(Int(UBound(a) * Rnd()))
+        Next
+
+        Dim v As Match = Regex.Match(s, "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", RegexOptions.IgnoreCase)
+        Do Until v.Success
+            s = Mid(s, 1, Len(s) - 1) & "1"
+            v = Regex.Match(s, "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", RegexOptions.IgnoreCase)
+        Loop
+
+        Return s
+    End Function
 End Class

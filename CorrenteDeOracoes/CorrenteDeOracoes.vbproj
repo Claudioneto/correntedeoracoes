@@ -27,6 +27,8 @@
     <OutputPath>bin\</OutputPath>
     <DocumentationFile>CorrenteDeOracoes.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DeployIisAppPath>CorrenteDeOracoes</DeployIisAppPath>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -262,7 +264,6 @@
     <Content Include="Views\Usuario\Index.vbhtml" />
     <Content Include="Views\Usuario\Create.vbhtml" />
     <Content Include="Views\Usuario\Edit.vbhtml" />
-    <Content Include="Views\Usuario\Delete.vbhtml" />
     <Content Include="Views\Testemunho\Index.vbhtml" />
     <Content Include="Views\Testemunho\Details.vbhtml" />
     <Content Include="Views\Testemunho\Create.vbhtml" />
@@ -272,6 +273,10 @@
     <Content Include="Views\Home\EstouOrando.vbhtml" />
     <Content Include="Views\Usuario\meusPedidos.vbhtml" />
     <Content Include="Views\Usuario\meusTestemunhos.vbhtml" />
+    <Content Include="Views\Home\termos.vbhtml" />
+    <Content Include="Views\Home\privacidade.vbhtml" />
+    <Content Include="Views\Home\missao.vbhtml" />
+    <Content Include="Views\Home\quemsomos.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

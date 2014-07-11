@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="CorrenteDeOracoes" />
+  <setParameter name="MongoConnection-Web.config Connection String" value="mongodb://admin:admin01@kahana.mongohq.com:10014/correntedeoracoes" />
+</parameters>
